@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hello World DApp</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+  <style>
+    .margin-top-3 {
+      margin-top: 1em;
+    }
+    .tdw {
+      table-layout: fixed;
+      white-space:nowrap;
+      text-overflow: ellipsis;
+      word-break:break-all;
+    }
+  </style>
+</head>
+<body class="container">
+  <h1>期权合约交易平台</h1>
+  <div class="col-sm-7 margin-top-3">
+    <h3>欧式期权合约</h3>
+    <div class="table-responsive">
+      <table class="table table-bordered tdw">
+        <thead>
+          <tr>
+            <th>期权ID</th>
+            <th>状态</th>
+            <th width="100px">账户A</th>
+            <th width="100px">账户B</th>
+            <th>期权名</th>
+            <th>数量</th>
+            <th>价格</th>
+            <th>权利金</th>
+            <th>交割日期</th>
+          </tr>
+        </thead>
+        <tbody id="candidate-rows">
+        </tbody>
+      </table>
+    </div>
+    <h3>美式期权合约</h3>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>期权ID</th>
+            <th>状态</th>
+            <th>账户A</th>
+            <th>账户B</th>
+            <th>期权名</th>
+            <th>数量</th>
+            <th>价格</th>
+            <th>权利金</th>
+            <th>交割开始日期</th>
+            <th>交割结束日期</th>
+          </tr>
+        </thead>
+        <tbody id="candidate-rows2">
+        </tbody>
+      </table>
+    </div>
+    <div >
+      <label>资产名</label><input type="text" id="tokenName"/>
+      <label>期权数量</label><input type="text" id="tokenNum"/>
+      <label>价格</label><input type="text" id="tokenPrice"/>
+      <label>权利金</label><input type="text" id="premium"/>
+      <label>交割日期</label><input type="text" id="deliveryDate"/>
+      <label>交割结束日期</label><input type="text" id="deliveryDateEnd"/>
+      <a href="#" onclick="createEurOption()" class="btn btn-primary">创建欧式期权</a>
+      <a href="#" onclick="createUSAOption()" class="btn btn-primary">创建美式期权</a>
+    </div>
+    <!-- <div id="dialog-form" title="创建欧式期权" display="none">
+      <p class="validateTips">所有表单字段都需要填</p>
+      <form>
+        <fieldset>
+          <label for="资产名"></label>
+          <input type="text" name="tokenName" id="tokenName" class="text ui-widget-content"></input>
+          <label for="数量"></label>
+          <input type="text" name="tokenNum" id="tokenNum" value="" class="text ui-widget-content ui-corner-all">
+          <label for="价格"></label>
+          <input type="text" name="tokenPrice" id="tokenPrice" value="" class="text ui-widget-content ui-corner-all">
+          <label for="权力金"></label>
+          <input type="text" name="rightMoney" id="rightMoney" value="" class="text ui-widget-content ui-corner-all">
+          <label for="交割日期"></label>
+          <input type="text" name="deliveryDate" id="deliveryDate" value="" class="text ui-widget-content ui-corner-all">
+        </fieldset>
+      </form>
+    </div> -->
+  </div>
+  <div class="col-sm-offset-1 col-sm-4 margin-top-3">
+    <div class="row">
+      <h2>Cash信息</h2>
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <tr>
+            <td>cash总量</td>
+            <td id="tokens-total"></td>
+          </tr>
+          <tr>
+            <td>已经销售的cash</td>
+            <td id="tokens-sold"></td>
+          </tr>
+          <tr>
+            <td>cash单价</td>
+            <td id="token-cost"></td>
+          </tr>
+          <tr>
+            <td>合约以太币</td>
+            <td id="contract-balance"></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="row margin-top-3">
+      <h2>购买cash</h2>
+      <div class="col-sm-12">
+        <div id="buy-msg"></div>
+        <input type="text" id="buy" class="col-sm-8" placeholder="Number of cash to buy"/>&nbsp;
+        <a href="#" onclick="buyTokens()" class="btn btn-primary">Buy</a>
+      </div>
+    </div>
+    <div class="row margin-top-3">
+      <h2>查看我的cash余额</h2>
+      <div class="col-sm-12">
+        <input type="text" id="voter-info", class="col-sm-8"/>&nbsp;
+        <a href="#" onclick="lookupVoterInfo()" class="btn btn-primary">Lookup</a>
+        <div class="voter-details row text-left">
+          <div id="tokens-bought" class="margin-top-3 col-md-12"></div>
+          <div id="votes-cast" class="col-md-12"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row margin-top-3">
+      <h2>将数据保存到ipfs</h2>
+      <div class="col-sm-12">
+        <input type="text" id="dataipfs", class="col-sm-8"/>&nbsp;
+        <a href="#" onclick="saveDataToIpfs()" class="btn btn-primary">保存</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+<script src="app.js"></script>
+</html>
